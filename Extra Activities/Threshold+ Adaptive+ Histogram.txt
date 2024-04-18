@@ -1,0 +1,24 @@
+import cv2
+from matplotlib import pyplot as plt
+
+img = cv2.imread('h.jpg', cv2.IMREAD_GRAYSCALE)
+print(img.size,img.shape)
+
+
+blurred = cv2.GaussianBlur(img, (5, 5), 0)
+_, thresholded = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+
+# thresh1 = cv2.adaptiveThreshold(blurred, 255, cv2.ADAPTIVE_THRESH_MEAN_C,
+#                                           cv2.THRESH_BINARY, 199, 100)
+
+
+# # alternative way to find histogram of an image
+# plt.hist(thresholded.ravel(), 256, [0, 256])
+# plt.show()
+# #
+#
+#
+thresholded = cv2.resize(thresh1,(800,700))
+cv2.imshow("adsdf",thresholded)
+# cv2.imshow("adsdf2",binary_image)
+cv2.waitKey(0)

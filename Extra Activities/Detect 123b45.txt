@@ -1,0 +1,35 @@
+import pandas as pd
+import re
+
+# Replace 'bb_1_131223_2.csv' with the path to your CSV file
+file_path = 'Upper_file30 - Sheet (1).csv'
+# a,b,c,d,e,f,g
+# Replace 'e' with the actual name of the column you want to print
+desired_column = 'e'
+desired_column2 = 'a'
+
+# Read the CSV file into a DataFrame
+df = pd.read_csv(file_path)
+pattern = r'\d+[a-zA-Z]+\d+'
+# Print all values in the specified column
+c = list(df[desired_column])
+sl = list(df[desired_column2])
+BB1 = 0
+BB2 = 0
+dd = 0
+for i in range(len(c)):
+    s = str(c[i])
+    if s == "bbbbbbb":
+        BB1 = BB1+1
+        pass
+    elif s.isdigit():
+        dd = dd+1
+        pass
+    else:
+        BB2 = BB2 + 1
+        print(sl[i], s)
+
+
+print(dd)
+
+

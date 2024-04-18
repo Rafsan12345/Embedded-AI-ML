@@ -1,0 +1,10 @@
+import shutil
+
+source_path = r'C:\Users\DCL\Desktop\S\data.csv'
+destination_path = r'C:\Users\DCL\Desktop\data.csv'
+
+try:
+    shutil.move(source_path, destination_path)
+    print(f"File '{source_path}' moved to '{destination_path}' successfully.")
+except FileNotFoundError:
+    print(f"Error: The file '{source}")

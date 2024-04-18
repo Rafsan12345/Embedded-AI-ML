@@ -1,0 +1,27 @@
+import threading
+import time
+
+
+def f1():
+    print("Sleep 2 Sec")
+    time.sleep(2)
+    print("After Sleep 2 Sec")
+
+
+
+def f2():
+    print("Sleep 3 Sec")
+    time.sleep(3)
+    print("After Sleep 2 Sec")
+
+def f3():
+    print("No sleep")
+
+
+x = threading.Thread(target=f1)
+x.start()
+y = threading.Thread(target=f2)
+y.start()
+z = threading.Thread(target=f3)
+z.start()
+# f3()

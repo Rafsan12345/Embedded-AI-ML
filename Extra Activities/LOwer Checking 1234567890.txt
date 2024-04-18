@@ -1,0 +1,5 @@
+sequence = "DCBBABDBADbDbbDbBADBbbDDBBDCBbADACADDADbBAACCCBbCbCDDCDDDCCDBAbAAABCDCCCBBB"
+
+# Print indices and characters from 1 to 75
+for index, char in enumerate(sequence[:75], start=1):
+    print(f"{index} = {char}")

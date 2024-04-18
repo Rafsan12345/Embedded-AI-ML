@@ -1,0 +1,13 @@
+bd = "১২৩৪৫৬৭৮৯০"
+en = "1234567890"
+nu = 220
+bn = []
+for i in range(len(str(nu))):
+    nu = str(nu)
+    for l in range(len(en)):
+        if nu[i] == en[l]:
+            bn.append(bd[l])
+
+bengali_number_str = ''.join(bn)
+
+print(bengali_number_str)

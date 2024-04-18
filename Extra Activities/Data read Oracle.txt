@@ -1,0 +1,32 @@
+import cx_Oracle
+
+# Connect to the Oracle database
+con = cx_Oracle.connect('system/123@localhost:1521/xe')
+
+try:
+    # Create a cursor
+    cursor = con.cursor()
+
+    # Execute a SELECT query to fetch data
+    sql_select = """SELECT Roll, Present FROM Attendence"""
+    cursor.execute(sql_select)
+
+    # Fetch all rows
+    rows = cursor.fetchall()
+
+    # Display the retrieved data
+    print("Data from 'try' table:")
+    for row in rows:
+        print(f"ID: {row[0]}, Name: {row[1]}")
+
+except cx_Oracle.DatabaseError as err:
+    print(f"Error: {err}")
+
+except Exception as e:
+    print(f"Unexpected error: {e}")
+
+finally:
+    # Close the cursor and connection
+    if cursor:
+        cursor.close()
+    con.close()

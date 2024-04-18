@@ -1,0 +1,21 @@
+import pandas as pd
+from sklearn import linear_model
+
+df = pd.read_csv('data.csv')
+
+Reg = linear_model.LinearRegression()
+
+Reg.fit(df[["Humidity","Temperature","Sun"]],df.Rain)
+
+print(Reg.coef_)
+print(Reg.intercept_)
+print(Reg.predict([[94,15,850]]))
+
+
+
+
+print(0.27696515*94 -0.35122605*15 -0.20581887*850 + 250.81577387846087 )
+
+#df.tail()
+
+

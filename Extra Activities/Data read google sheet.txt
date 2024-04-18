@@ -1,0 +1,31 @@
+import os
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+
+# Set up credentials
+scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+
+# Construct the path to the service account JSON file
+credentials_path = os.path.join(os.path.dirname(__file__), 'test1-406109-c7ecb0c85820.json')
+
+# Load credentials from the JSON file
+credentials = ServiceAccountCredentials.from_json_keyfile_name(credentials_path, scope)
+gc = gspread.authorize(credentials)
+
+# Open the Google Sheet by its title or URL
+sheet_link = 'https://docs.google.com/spreadsheets/d/1jSNHJm0ZSp3Zpzj7Zegphfh7XQ9P-9mgTi5qM8wphvQ/edit?usp=sharing'
+# Extract the spreadsheet key from the URL
+spreadsheet_key = sheet_link.split('/')[-2]
+# Open the spreadsheet using the key
+sheet = gc.open_by_key(spreadsheet_key).sheet1
+
+try:
+    # Read data from the sheet
+    data = sheet.get_all_records()
+    print("Existing data:")
+    print(data)
+except IndexError as e:
+    print(f"Error: {e}")
+    print("Make sure the first row of the sheet contains headers.")
+except Exception as e:
+    print(f"An unexpected error occurred: {e}")

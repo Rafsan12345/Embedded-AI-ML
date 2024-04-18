@@ -1,0 +1,39 @@
+import os
+import cv2
+
+# Set the input and output folder paths
+input_folder = 'C:\\Users\\DCL\\Desktop\\S'
+output_folder = 'C:\\Users\\DCL\\Desktop\\S\\compressed_images_high_quality'
+
+# Ensure the output folder exists
+os.makedirs(output_folder, exist_ok=True)
+
+# Set the target file size in kilobytes (100 KB in this example)
+target_file_size_kb = 100
+
+# Set the desired higher quality level
+higher_quality_level = 90
+
+# Loop through all files in the input folder
+for filename in os.listdir(input_folder):
+    if filename.endswith(('.jpg', '.jpeg', '.png')):
+        # Construct the full path for the input and output images
+        input_path = os.path.join(input_folder, filename)
+        output_path = os.path.join(output_folder, filename)
+
+        # Load the image
+        image = cv2.imread(input_path)
+
+        # Resize the image to a reasonable size to speed up compression
+        # Adjust the dimensions as needed
+        resized_image = cv2.resize(image, (800, 600))
+
+        # Use a higher quality level for JPEG compression
+        _, encoded_image = cv2.imencode('.jpg', resized_image, [cv2.IMWRITE_JPEG_QUALITY, higher_quality_level])
+
+        # Calculate the file size in kilobytes
+        file_size_kb = len(encoded_image.tobytes()) / 1024
+
+        # Save the compressed image with the same name
+        cv2.imwrite(output_path, resized_image, [cv2.IMWRITE_JPEG_QUALITY, higher_quality_level])
+        print(f"Image '{filename}' saved with quality level {higher_quality_level} to achieve {file_size_kb:.2f} KB.")

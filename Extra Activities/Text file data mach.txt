@@ -1,0 +1,9 @@
+def find_exact_match(file_path, target_text):
+    with open(file_path, 'r') as file:
+        for line_number, line in enumerate(file, start=1):
+            if target_text in line:
+                print(f"Exact match found at line {line_number}: {line.strip()}")
+
+file_path = 'T1.txt'
+target_text = '12345'
+find_exact_match(file_path, target_text)

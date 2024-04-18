@@ -1,0 +1,47 @@
+import cx_Oracle
+from reportlab.pdfgen import canvas
+
+# Connect to the Oracle database
+conn = cx_Oracle.connect('system/123@localhost:1521/xe')
+
+try:
+    # Create a cursor
+    cur = conn.cursor()
+
+    # Define a condition
+    condition = "Roll = 1 AND Present = 'Yes'"
+#condition = "Present = 'Yes' AND Roll <= 3"
+    # Select data from the 'Attendance' table based on the condition
+    sql_query = f"SELECT * FROM Attendance WHERE {condition}"
+
+    # Execute the SQL query
+    cur.execute(sql_query)
+
+    # Fetch all rows
+    rows = cur.fetchall()
+
+    # Create a PDF file and add data to it
+    pdf_filename = "attendance_report.pdf"
+    pdf = canvas.Canvas(pdf_filename)
+
+    pdf.drawString(100, 800, "Attendance Report")
+
+    # Display the results in the PDF
+    y_position = 780
+    for row in rows:
+        pdf.drawString(100, y_position, f"Roll: {row[0]}, Present: {row[1]}")
+        y_position -= 20
+
+    pdf.save()
+
+    print(f"Data exported to {pdf_filename}.")
+
+except cx_Oracle.Error as error:
+    print("Error:", error)
+
+finally:
+    # Close the cursor and connection
+    if cur:
+        cur.close()
+    if conn:
+        conn.close()

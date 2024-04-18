@@ -1,0 +1,30 @@
+import mysql.connector
+
+# Replace 'your_username', 'your_password', 'your_host', and 'your_database' with your MySQL credentials
+conn = mysql.connector.connect(
+    user='root',
+    password='diu123456',
+    host='localhost',
+    database='test1'
+)
+
+try:
+    # Create a cursor object to interact with the database
+    myCursor = conn.cursor()
+
+    # Your SQL query to select all rows from the 'student' table
+    query = "SELECT * FROM student"
+
+    # Execute the query
+    myCursor.execute(query)
+
+    # Fetch all the rows
+    rows = myCursor.fetchall()
+
+    # Process the rows
+    for row in rows:
+        print(row)
+
+finally:
+    pass
+    # Close the

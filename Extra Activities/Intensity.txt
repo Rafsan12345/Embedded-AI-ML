@@ -1,0 +1,18 @@
+import cv2
+import numpy as np
+
+# Read the image
+image = cv2.imread('tt.PNG')
+
+# Define the alpha (weight) and beta parameters
+alpha = 3.5  # Controls the image intensity
+beta = 0    # Bias, usually set to 0
+
+# Increase the image intensity using cv2.addWeighted
+result = cv2.addWeighted(image, alpha, np.zeros_like(image), 0, beta)
+
+# Display the original and the result
+cv2.imshow('Original Image', image)
+cv2.imshow('Increased Intensity', result)
+cv2.waitKey(0)
+cv2.destroyAllWindows()

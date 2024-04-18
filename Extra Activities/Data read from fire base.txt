@@ -1,0 +1,14 @@
+import firebase_admin
+from firebase_admin import credentials, db
+
+# Initialize Firebase with your service account credentials
+cred = credentials.Certificate("tt11-3099c-firebase-adminsdk-6kfy8-816473ad99.json")
+firebase_admin.initialize_app(cred, {"databaseURL": "https://tt11-3099c-default-rtdb.firebaseio.com/"})
+
+# Get a reference to the database
+ref = db.reference("sadf")  # Replace "your_node" with the actual node/key where your data is stored
+
+# Read data from Firebase
+data = ref.get()
+print("Data from Firebase:")
+print(data)

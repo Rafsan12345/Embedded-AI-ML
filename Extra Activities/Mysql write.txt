@@ -1,0 +1,20 @@
+import mysql.connector
+
+# Replace 'your_username', 'your_password', 'your_host', and 'your_database' with your MySQL credentials
+conn = mysql.connector.connect(
+    user='root',
+    password='diu123456',
+    host='localhost',
+    database='test1'
+)
+
+myCursor = conn.cursor()
+
+formula = "INSERT INTO student(name,age) VALUES(%s,%s)"
+
+student1 = ("Hasemi",22)
+
+
+myCursor.execute(formula,student1)
+
+conn.commit()

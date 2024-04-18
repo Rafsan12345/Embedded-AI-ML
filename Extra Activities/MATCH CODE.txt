@@ -1,0 +1,25 @@
+def find_unmatched_indices(str1, str2):
+    unmatched_indices = []
+
+    # Find the minimum length to avoid IndexError
+    min_len = min(len(str1), len(str2))
+
+    # Iterate through the characters and find unmatched indices
+    for i in range(min_len):
+        if str1[i] != str2[i]:
+            unmatched_indices.append(i)
+            print(f"আমি দিয়েছি >> {str1[i]}",f"রাশেদ ভাই দিয়েছে >> {str2[i]}")
+
+    # Check if the strings have different lengths and add remaining indices
+    if len(str1) > len(str2):
+        unmatched_indices.extend(range(min_len, len(str1)))
+    elif len(str2) > len(str1):
+        unmatched_indices.extend(range(min_len, len(str2)))
+
+    return unmatched_indices
+
+# Example usage
+string1 = "CCBBDDDAAADDbbAB?bb?bABBBDDCCBBCCCCBABbCbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+string2 = "CCBBDDDAAADDbbAB?bb?bABBBDDCCBBCbCCBABbCbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+result = find_unmatched_indices(string1, string2)
+print("Unmatched indices:", result)

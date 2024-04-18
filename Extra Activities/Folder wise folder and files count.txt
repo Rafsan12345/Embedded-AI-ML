@@ -1,0 +1,32 @@
+import os
+import time
+
+def get_folder_info(path):
+    files_count = 0
+    folders_count = 0
+
+    for root, dirs, files in os.walk(path):
+        folders_count += len(dirs)
+        files_count += len(files)
+
+    return {'Folder Name': path,'files_count': files_count, 'folders_count': folders_count}
+
+def print_folder_info(folder_info):
+    print("Files Count\tFolder Count")
+    print(f"{folder_info['files_count']}\t\t\t{folder_info['folders_count']}")
+
+# Specify the path to the directory you want to analyze
+directory_path = 'D:\\DPE\\1\\36_Rangpur'
+directory_path2 = 'D:\\DPE\\1\\37_Gaibandha'
+directory_path3 = 'D:\\DPE\\1\\38_Kurigram'
+
+# Run the loop with a one-minute interval
+while True:
+    folder_info = get_folder_info(directory_path)
+    folder_info2 = get_folder_info(directory_path2)
+    folder_info3 = get_folder_info(directory_path3)
+    print(folder_info)
+    print(folder_info2)
+    print(folder_info3)
+    # print_folder_info(folder_info)
+    time.sleep(10)  # Sleep for one minute before fetching and printing again

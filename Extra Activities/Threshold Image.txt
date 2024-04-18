@@ -1,0 +1,21 @@
+import cv2
+
+# Example usage:
+image_path = 'C:/Users/DCL/Downloads/TEST/00000243.jpg'
+original_image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+
+if original_image is None:
+    raise ValueError(f"Unable to read the image at path: {image_path}")
+
+# Set the threshold value
+threshold_value = 40  # You can adjust this value based on your requirements
+
+# Apply the threshold
+_, thresholded_image = cv2.threshold(original_image, threshold_value, 255, cv2.THRESH_BINARY)
+original_image = cv2.resize(original_image,(500,500))
+thresholded_image = cv2.resize(thresholded_image,(500,500))
+# Display the original and thresholded images
+cv2.imshow("Original Image", original_image)
+cv2.imshow("Thresholded Image", thresholded_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()

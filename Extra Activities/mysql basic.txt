@@ -1,0 +1,21 @@
+import mysql.connector
+
+# Replace 'your_username', 'your_password', 'your_host', and 'your_database' with your MySQL credentials
+conn = mysql.connector.connect(
+    user='root',
+    password='diu123456',
+    host='localhost',
+    database='test1'
+)
+
+myCursor = conn.cursor()
+#CREATE DATABASE Test1
+#SHOW DATABASES
+#CREATE TABLE student(name VARCHAR(255),age INTEGER(10))
+
+myCursor.execute("SHOW TABLES")
+
+
+for db in myCursor:
+    print(db)
+

@@ -1,0 +1,9 @@
+import firebase_admin
+from firebase_admin import credentials,db
+name = input("your name??")
+country = input("your country?")
+#https://test1-406109-default-rtdb.asia-southeast1.firebasedatabase.app/
+cred = credentials.Certificate("tt11-3099c-firebase-adminsdk-6kfy8-816473ad99.json")
+firebase_admin.initialize_app(cred,{"databaseURL":"https://tt11-3099c-default-rtdb.firebaseio.com/"})
+ref = db.reference(str(name))
+ref.set({"name":str(name),"Country":str(country)})

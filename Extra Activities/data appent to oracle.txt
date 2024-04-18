@@ -1,0 +1,37 @@
+import cx_Oracle
+
+# Connect to the Oracle database
+conn = cx_Oracle.connect('system/123@localhost:1521/xe')
+
+try:
+    # Create a cursor
+    cur = conn.cursor()
+
+    # Insert data into the 'Attendance' table
+    sql_insert = "INSERT INTO Attendence (Roll, Present) VALUES (:1, :2)"
+
+    # Data to be inserted
+    data_to_insert = [
+        (1, 'Yes'),
+        (2, 'No'),
+        (3, 'Yes'),
+        # Add more data as needed
+    ]
+
+    # Execute the SQL query for each row of data
+    cur.executemany(sql_insert, data_to_insert)
+
+    # Commit the changes
+    conn.commit()
+
+    print("Data inserted successfully.")
+
+except cx_Oracle.Error as error:
+    print("Error:", error)
+
+finally:
+    # Close the cursor and connection
+    if cur:
+        cur.close()
+    if conn:
+        conn.close()

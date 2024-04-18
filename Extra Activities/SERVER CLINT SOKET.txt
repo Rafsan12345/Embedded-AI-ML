@@ -1,0 +1,27 @@
+################################################ CLINTS
+import socket
+
+c = socket.socket()
+
+c.connect(("localhost",9999))
+print(c.recv(1024).decode())
+
+
+#################################################### SERVER
+
+import socket
+s = socket.socket()
+print("socket create")
+s.bind(("localhost",9999))
+s.listen(3)
+
+print("waiting for connection")
+
+while True:
+    c, add = s.accept()
+    print("connect with",add)
+
+    c.send(bytes("Welcome to DCL",'utf-8'))
+
+    c.close()
+

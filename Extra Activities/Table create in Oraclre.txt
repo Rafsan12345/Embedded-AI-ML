@@ -1,0 +1,18 @@
+import cx_Oracle
+
+
+conn = cx_Oracle.connect('system/123@localhost:1521/xe')
+
+
+
+print (conn.version)
+
+try:
+    cur = conn.cursor()
+    sql_create="""create table Attendence(Roll int, Present varchar(50))"""
+    cur.execute(sql_create)
+    
+except Exception as err:
+    print('Error while creating a table')
+else:
+    print('table created')

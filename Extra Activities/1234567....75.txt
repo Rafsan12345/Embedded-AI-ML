@@ -1,0 +1,7 @@
+def print_letter_mapping(input_string):
+    for i, char in enumerate(input_string, start=1):
+        print(f"{i} = {char}")
+
+# Example usage:
+input_str = "DCBCACABDCbAbbCDbbBDDbBACDDbDBABDADAbBCADAADBCbbCbACBDCDCBDbbACDABbbBABDBAC"
+print_letter_mapping(input_str)

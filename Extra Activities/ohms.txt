@@ -1,0 +1,17 @@
+float ohms(float i, float v, float r)
+{
+    if(i==0)
+    {
+      return v/r ;
+    }
+    
+    if(v==0)
+    {
+      return i*r ;
+    }
+    if(r==0)
+    {
+      return v/i ;
+    }
+    
+}

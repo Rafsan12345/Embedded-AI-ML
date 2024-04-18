@@ -1,0 +1,53 @@
+import cv2
+import numpy as np
+
+def find_rotation_difference(image1, image2):
+    # Convert the images to grayscale
+    gray1 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)
+    gray2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
+
+    # Apply GaussianBlur to reduce noise
+    blurred1 = cv2.GaussianBlur(gray1, (5, 5), 0)
+    blurred2 = cv2.GaussianBlur(gray2, (5, 5), 0)
+
+    # Perform edge detection using Canny
+    edges1 = cv2.Canny(blurred1, 50, 150)
+    edges2 = cv2.Canny(blurred2, 50, 150)
+
+    # Use Hough Line Transform to detect lines in the images
+    lines1 = cv2.HoughLines(edges1, 1, np.pi / 180, 100)
+    lines2 = cv2.HoughLines(edges2, 1, np.pi / 180, 100)
+
+    # Calculate the dominant angle from the detected lines in each image
+    if lines1 is not None and len(lines1) > 0 and lines2 is not None and len(lines2) > 0:
+        angles1 = [line[0][1] for line in lines1]
+        angles2 = [line[0][1] for line in lines2]
+
+        dominant_angle1 = np.median(angles1)
+        dominant_angle2 = np.median(angles2)
+
+        # Calculate the rotation difference
+        rotation_difference = dominant_angle2 - dominant_angle1
+
+        return rotation_difference
+    else:
+        return None
+
+# Load the two images
+image1 = cv2.imread('NR.jpg')
+image2 = cv2.imread('00000006.jpg')
+
+# Find the rotation difference between the two images
+difference = find_rotation_difference(image1, image2)
+
+# Print the rotation difference
+if difference is not None:
+    print(f"Rotation Difference: {difference} degrees")
+else:
+    print("Unable to find rotation difference.")
+
+# Optionally, display the images
+cv2.imshow('Image 1', image1)
+cv2.imshow('Image 2', image2)
+cv2.waitKey(0)
+cv2.destroyAllWindows()

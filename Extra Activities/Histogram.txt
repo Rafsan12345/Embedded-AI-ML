@@ -1,0 +1,15 @@
+import cv2
+from matplotlib import pyplot as plt
+
+img = cv2.imread('lina.png', 0)
+print(img.size,img.shape)
+_, binary_image = cv2.threshold(img, 190, 255, cv2.THRESH_BINARY_INV)
+# alternative way to find histogram of an image
+# plt.hist(img.ravel(), 256, [0, 256])
+# plt.show()
+#
+
+
+cv2.imshow("adsdf",img)
+cv2.imshow("adsdf2",binary_image)
+cv2.waitKey(0)

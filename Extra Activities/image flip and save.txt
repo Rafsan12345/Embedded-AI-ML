@@ -1,0 +1,29 @@
+import cv2
+import os
+
+def mirror_images_in_folder(folder_path):
+    # Iterate through all files in the folder
+    for filename in os.listdir(folder_path):
+        if filename.endswith(('.jpg', '.jpeg', '.png')):  # Adjust the file extensions as needed
+            # Construct the full file path
+            file_path = os.path.join(folder_path, filename)
+
+            # Read the image
+            image = cv2.imread(file_path)
+
+            # Flip the image horizontally
+            mirrored_image_horizontal = cv2.flip(image, 1)
+
+            # Construct the file path for the mirrored image
+            mirrored_file_path_horizontal = os.path.join(folder_path, f'{filename}')
+
+            # Save the mirrored image
+            cv2.imwrite(mirrored_file_path_horizontal, mirrored_image_horizontal)
+
+            # Flip the image vertically
+            mirrored_image_vertical = cv2.flip(image, 0)
+
+
+if __name__ == "__main__":
+    folder_path = 'E:\\41_Lalmonirhat\\processed\\LP41-0657-01'  # Replace with the path to your folder
+    mirror_images_in_folder(folder_path)

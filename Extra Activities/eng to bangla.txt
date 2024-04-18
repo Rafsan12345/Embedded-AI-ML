@@ -1,0 +1,12 @@
+from googletrans import Translator
+
+def translate_to_bengali(text):
+    translator = Translator()
+    translation = translator.translate(text, src='en', dest='bn')
+    return translation.text
+
+english_text = "I love Bangladesh"
+bengali_text = translate_to_bengali(english_text)
+
+print(f"English: {english_text}")
+print(f"Bengali: {bengali_text}")
